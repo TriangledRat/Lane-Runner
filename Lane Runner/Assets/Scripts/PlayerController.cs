@@ -4,10 +4,11 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
-    [SerializeField] float speed=10;
+    [SerializeField] float speed=10, jumpSpeed = 10;
     CharacterController controller;
     int playerPos;
     Vector3 targetPos, storePos;
+    float verticalSpeed, gravity = 9.81f;
 
     // Start is called before the first frame update
     void Start()
@@ -22,12 +23,12 @@ public class PlayerController : MonoBehaviour
     {
         Vector3 movingVector = Vector3.zero;
         storePos = transform.position;  
-        if (Input.GetKeyDown(KeyCode.A))
+        if (Input.GetKeyDown(KeyCode.A) && controller.isGrounded)
         {
             MoveLane(false);           
         }
 
-        if(Input.GetKeyDown(KeyCode.D))
+        if(Input.GetKeyDown(KeyCode.D) && controller.isGrounded)
         {
             MoveLane(true);           
         }
@@ -46,7 +47,22 @@ public class PlayerController : MonoBehaviour
             default:
                 targetPos = new Vector3(storePos.x, storePos.y, 0);
                 break;
-        }  
+        }
+
+        if (controller.isGrounded)
+        {
+            if (Input.GetKeyDown(KeyCode.W))
+            {
+                verticalSpeed = jumpSpeed;
+            }
+        }
+        else
+        {
+            verticalSpeed -= (gravity * Time.deltaTime);
+        }
+
+
+        movingVector.y = verticalSpeed;
         movingVector.z = (targetPos - transform.position).z * speed;
         controller.Move(movingVector * Time.deltaTime);
 
