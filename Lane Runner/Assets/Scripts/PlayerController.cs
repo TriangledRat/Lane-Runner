@@ -23,12 +23,12 @@ public class PlayerController : MonoBehaviour
     {
         Vector3 movingVector = Vector3.zero;
         storePos = transform.position;  
-        if (Input.GetKeyDown(KeyCode.A) && controller.isGrounded)
+        if (Input.GetKeyDown("left") && controller.isGrounded)
         {
             MoveLane(false);           
         }
 
-        if(Input.GetKeyDown(KeyCode.D) && controller.isGrounded)
+        if(Input.GetKeyDown("right") && controller.isGrounded)
         {
             MoveLane(true);           
         }
@@ -51,7 +51,7 @@ public class PlayerController : MonoBehaviour
 
         if (controller.isGrounded)
         {
-            if (Input.GetKeyDown(KeyCode.W))
+            if (Input.GetKeyDown("up"))
             {
                 verticalSpeed = jumpSpeed;
             }
