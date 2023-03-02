@@ -1,21 +1,25 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
-    [SerializeField] float speed=10, jumpSpeed = 10;
+    [SerializeField] float speed=10, jumpSpeed = 5, forwardMovement = 10;
     CharacterController controller;
     int playerPos;
     Vector3 targetPos, storePos;
-    float verticalSpeed, gravity = 9.81f;
-
+    float verticalSpeed, gravity = 9.81f, forwardStore, cooldown;
+    bool recovery = false;
+    internal bool hit;
     // Start is called before the first frame update
     void Start()
     {
         playerPos = 1;
         targetPos = Vector3.zero;
         controller = GetComponent<CharacterController>();
+        forwardStore = forwardMovement;
+        cooldown = 3;
     }
 
     // Update is called once per frame
@@ -61,7 +65,25 @@ public class PlayerController : MonoBehaviour
             verticalSpeed -= (gravity * Time.deltaTime);
         }
 
+        if (hit)
+        {
+            forwardMovement /= 2;
+            recovery = true;
+            hit = false;
+        }
 
+        if (recovery)
+        {
+            cooldown -= Time.deltaTime;
+        }
+
+        if (cooldown <= 0)
+        {
+            recovery = false;
+            forwardMovement = forwardStore;
+        }
+
+        movingVector.x = -forwardMovement;
         movingVector.y = verticalSpeed;
         movingVector.z = (targetPos - transform.position).z * speed;
         controller.Move(movingVector * Time.deltaTime);
@@ -77,6 +99,15 @@ public class PlayerController : MonoBehaviour
         else if (!goingRight && playerPos != 0)
         {
             playerPos--;
+        }
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if(other.gameObject.tag == "Obstacle" && !recovery)
+        {
+            hit = true;
+            cooldown = 3;
         }
     }
 
