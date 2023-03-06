@@ -7,6 +7,7 @@ public class PlayerController : MonoBehaviour
 {
     [SerializeField] float speed=10, jumpSpeed = 5, forwardMovement = 10;
     CharacterController controller;
+    PlayerLives lives;
     int playerPos;
     Vector3 targetPos, storePos;
     float verticalSpeed, gravity = 9.81f, forwardStore, cooldown;
@@ -18,6 +19,7 @@ public class PlayerController : MonoBehaviour
         playerPos = 1;
         targetPos = Vector3.zero;
         controller = GetComponent<CharacterController>();
+        lives = GetComponent<PlayerLives>();    
         forwardStore = forwardMovement;
         cooldown = 3;
     }
@@ -67,6 +69,7 @@ public class PlayerController : MonoBehaviour
 
         if (hit)
         {
+            lives.lives--;
             forwardMovement /= 2;
             recovery = true;
             hit = false;

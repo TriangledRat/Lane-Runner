@@ -1,11 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PlayerLives : MonoBehaviour
 {
     PlayerController playerController;
-    int lives;
+    internal int lives;
     // Start is called before the first frame update
     void Start()
     {
@@ -21,5 +22,10 @@ public class PlayerLives : MonoBehaviour
         {
             lives--;
         }        
+
+        if(lives == 0)
+        {
+            SceneManager.LoadScene("GameOverScene");
+        }
     }
 }
