@@ -29,12 +29,12 @@ public class PlayerController : MonoBehaviour
     {
         Vector3 movingVector = Vector3.zero;
         storePos = transform.position;  
-        if (Input.GetKeyDown("left") && controller.isGrounded)
+        if (Input.GetKeyDown("left"))
         {
             MoveLane(false);           
         }
 
-        if(Input.GetKeyDown("right") && controller.isGrounded)
+        if(Input.GetKeyDown("right"))
         {
             MoveLane(true);           
         }
@@ -95,11 +95,11 @@ public class PlayerController : MonoBehaviour
 
     public void MoveLane(bool goingRight)
     {        
-        if (goingRight && playerPos != 2)
+        if (goingRight && playerPos != 2 && controller.isGrounded)
         {
             playerPos++;
         }
-        else if (!goingRight && playerPos != 0)
+        else if (!goingRight && playerPos != 0 && controller.isGrounded)
         {
             playerPos--;
         }
