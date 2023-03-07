@@ -105,7 +105,7 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    private void Jump(bool jumping)
+    public void Jump(bool jumping)
     {
         verticalSpeed = jumpSpeed;
     }

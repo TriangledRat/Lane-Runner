@@ -35,4 +35,14 @@ public class ControllerTests : IPrebuildSetup
 
         Assert.Greater(player.transform.position.z, storePosition);
     }
+
+    [UnityTest]
+    public IEnumerator JumpTest()
+    {
+        var storePosition = player.transform.position.y;
+        player.GetComponent<PlayerController>().Jump(true);
+        yield return new WaitForSeconds(2);
+
+        Assert.Greater(storePosition, player.transform.position.y);
+    }
 }
