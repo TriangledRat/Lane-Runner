@@ -17,8 +17,7 @@ public class ControllerTests : IPrebuildSetup
         player = new GameObject();
         player.AddComponent<PlayerController>();
         player.AddComponent<CharacterController>();
-        player.transform.position = new Vector3(137, 1, 0);
-        
+        player.transform.position = new Vector3(137, 1, 0);        
     }
 
 
@@ -69,10 +68,8 @@ public class ControllerTests : IPrebuildSetup
         yield return new WaitForSeconds(1);
         var storePosition = player.transform.position.z;
         player.GetComponent<PlayerController>().Jump(true);
-        player.GetComponent<PlayerController>().MoveLane(true);
-        
+        player.GetComponent<PlayerController>().MoveLane(true);        
 
         Assert.AreEqual(storePosition, player.transform.position.z);
-
     }
 }
