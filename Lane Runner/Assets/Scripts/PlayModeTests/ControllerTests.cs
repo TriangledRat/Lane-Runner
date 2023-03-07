@@ -62,4 +62,17 @@ public class ControllerTests : IPrebuildSetup
 
         Assert.AreEqual(storePosition, player.transform.position.y);
     }
+
+    [UnityTest]
+    public IEnumerator PlayerCantMoveWhileJumping()
+    {
+        yield return new WaitForSeconds(1);
+        var storePosition = player.transform.position.z;
+        player.GetComponent<PlayerController>().Jump(true);
+        player.GetComponent<PlayerController>().MoveLane(true);
+        
+
+        Assert.AreEqual(storePosition, player.transform.position.z);
+
+    }
 }
