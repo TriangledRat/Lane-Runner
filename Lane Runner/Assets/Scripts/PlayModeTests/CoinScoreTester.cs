@@ -30,4 +30,11 @@ public class CoinScoreTester : IPrebuildSetup
         Assert.Greater(coins, 0);
         
     }
+
+    [UnityTest]
+    public IEnumerator CoinsRemovedFromScene()
+    {
+        yield return new WaitForSeconds(5);
+        Assert.IsNull(coin);
+    }
 }
