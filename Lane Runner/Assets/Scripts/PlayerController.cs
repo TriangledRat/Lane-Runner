@@ -93,7 +93,7 @@ public class PlayerController : MonoBehaviour
 
     }
 
-    private void MoveLane(bool goingRight)
+    public void MoveLane(bool goingRight)
     {        
         if (goingRight && playerPos != 2)
         {
