@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
-    [SerializeField] float speed=10, jumpSpeed = 5, forwardMovement = 10;
+    [SerializeField] public float speed=10, jumpSpeed = 5, forwardMovement = 10;
     CharacterController controller;
     PlayerLives lives;
     int playerPos;
