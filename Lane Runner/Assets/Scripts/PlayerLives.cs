@@ -17,7 +17,6 @@ public class PlayerLives : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Debug.Log(lives);
         if (playerController.hit)
         {
             lives--;

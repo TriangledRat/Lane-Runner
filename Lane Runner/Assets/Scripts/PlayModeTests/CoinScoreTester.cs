@@ -9,10 +9,12 @@ using UnityEngine.TestTools;
 public class CoinScoreTester : IPrebuildSetup
 {
     GameObject player;
+    GameObject coin;
     [SetUp]
     public void Setup()
     {
         EditorSceneManager.LoadSceneAsyncInPlayMode("Assets/Scenes/GameScene.unity", new LoadSceneParameters(LoadSceneMode.Additive));
+        coin = GameObject.FindGameObjectWithTag("Coin");
         player = new GameObject();
         player.AddComponent<PlayerController>();
         player.AddComponent<CoinInventory>();
@@ -22,9 +24,10 @@ public class CoinScoreTester : IPrebuildSetup
 
     [UnityTest]
     public IEnumerator CoinsAddedToInventory()
-    {
-        var coins = player.GetComponent<CoinInventory>().coins;
+    {        
         yield return new WaitForSeconds(3);
-        Assert.Greater(0, coins);
+        var coins = player.GetComponent<CoinInventory>().coins;
+        Assert.Greater(coins, 0);
+        
     }
 }
