@@ -59,7 +59,7 @@ public class PlayerController : MonoBehaviour
         {
             if (Input.GetKeyDown("up"))
             {
-                verticalSpeed = jumpSpeed;
+                Jump(true);
             }
         }
         else
@@ -103,6 +103,11 @@ public class PlayerController : MonoBehaviour
         {
             playerPos--;
         }
+    }
+
+    private void Jump(bool jumping)
+    {
+        verticalSpeed = jumpSpeed;
     }
 
     private void OnTriggerEnter(Collider other)
