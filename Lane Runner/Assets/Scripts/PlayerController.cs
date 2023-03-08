@@ -12,7 +12,7 @@ public class PlayerController : MonoBehaviour
     Vector3 targetPos, storePos;
     float verticalSpeed, gravity = 9.81f, forwardStore, cooldown;
     bool recovery = false;
-    internal bool hit;
+    public bool hit;
     // Start is called before the first frame update
     void Start()
     {
