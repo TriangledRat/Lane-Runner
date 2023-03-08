@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using NUnit.Framework;
+using UnityEditor;
 using UnityEditor.SceneManagement;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -14,10 +15,9 @@ public class ControllerTests : IPrebuildSetup
     public void Setup()
     {
         EditorSceneManager.LoadSceneAsyncInPlayMode("Assets/Scenes/GameScene.unity", new LoadSceneParameters(LoadSceneMode.Additive));
-        player = new GameObject();
-        player.AddComponent<PlayerController>();
-        player.AddComponent<CharacterController>();
-        player.transform.position = new Vector3(50, 1, 0);        
+        GameObject playerPrefab = AssetDatabase.LoadAssetAtPath<GameObject>("Assets/Prefab/Player.prefab");
+        player = GameObject.Instantiate(playerPrefab);
+            
     }
 
     [TearDown]
@@ -33,7 +33,6 @@ public class ControllerTests : IPrebuildSetup
         var storePosition = player.transform.position.z;
         player.GetComponent<PlayerController>().MoveLane(false);
         yield return new WaitForSeconds(3);
-
         Assert.Greater(storePosition, player.transform.position.z);      
 
     }

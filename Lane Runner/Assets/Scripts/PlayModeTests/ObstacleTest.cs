@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using NUnit.Framework;
+using UnityEditor;
 using UnityEditor.SceneManagement;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -14,11 +15,9 @@ public class ObstacleTest : IPrebuildSetup
     public void Setup()
     {
         EditorSceneManager.LoadSceneAsyncInPlayMode("Assets/Scenes/GameScene.unity", new LoadSceneParameters(LoadSceneMode.Additive));
-        player = new GameObject();
-        player.AddComponent<PlayerController>();
-        player.AddComponent<CharacterController>();
-        player.AddComponent<PlayerLives>();
-        player.transform.position = new Vector3(137, 1, 0);
+        GameObject playerPrefab = AssetDatabase.LoadAssetAtPath<GameObject>("Assets/Prefab/Player.prefab");
+        player = GameObject.Instantiate(playerPrefab);
+
         obstacle = GameObject.FindGameObjectWithTag("Obstacle");
     }
 

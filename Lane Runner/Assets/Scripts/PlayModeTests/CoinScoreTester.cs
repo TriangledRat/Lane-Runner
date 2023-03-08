@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using NUnit.Framework;
+using UnityEditor;
 using UnityEditor.SceneManagement;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -15,10 +16,8 @@ public class CoinScoreTester : IPrebuildSetup
     {
         EditorSceneManager.LoadSceneAsyncInPlayMode("Assets/Scenes/GameScene.unity", new LoadSceneParameters(LoadSceneMode.Additive));
         coin = GameObject.FindGameObjectWithTag("Coin");
-        player = new GameObject();
-        player.AddComponent<PlayerController>();
-        player.AddComponent<CoinInventory>();
-        player.AddComponent<CharacterController>();
+        GameObject playerPrefab = AssetDatabase.LoadAssetAtPath<GameObject>("Assets/Prefab/Player.prefab");
+        player = GameObject.Instantiate(playerPrefab);
         player.transform.position = new Vector3(137, 1, 0);
     }
 
