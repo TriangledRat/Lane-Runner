@@ -29,7 +29,19 @@ public class ObstacleTest : IPrebuildSetup
         {
             Assert.IsTrue(player.GetComponent<PlayerController>().hit);
         }
-        yield return new WaitForEndOfFrame();
+        yield return null;
+    }
+
+    [UnityTest]
+    public IEnumerator DoesPlayerSlowDown()
+    {
+        var storeSpeed = -player.GetComponent<PlayerController>().forwardMovement;
+        if (player.GetComponent<PlayerController>().hit)
+        {
+            Assert.Greater(storeSpeed, -player.GetComponent<PlayerController>().forwardMovement);
+        }
+
+        yield return null;
     }
 
 }
