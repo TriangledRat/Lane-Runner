@@ -6,7 +6,7 @@ using UnityEngine.SceneManagement;
 public class PlayerLives : MonoBehaviour
 {
     PlayerController playerController;
-    internal int lives;
+    public int lives;
     // Start is called before the first frame update
     void Start()
     {

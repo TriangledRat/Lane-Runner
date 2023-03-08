@@ -22,6 +22,13 @@ public class CoinScoreTester : IPrebuildSetup
         player.transform.position = new Vector3(137, 1, 0);
     }
 
+    [TearDown]
+    public void Teardown()
+    {
+        GameObject.Destroy(player);
+        EditorSceneManager.UnloadSceneAsync("Assets/Scenes/GameScene.unity");
+    }
+
     [UnityTest]
     public IEnumerator CoinsAddedToInventory()
     {        

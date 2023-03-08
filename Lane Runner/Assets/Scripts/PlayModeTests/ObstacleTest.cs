@@ -22,6 +22,14 @@ public class ObstacleTest : IPrebuildSetup
         obstacle = GameObject.FindGameObjectWithTag("Obstacle");
     }
 
+    [TearDown]
+    public void Teardown()
+    {
+        GameObject.Destroy(player);
+        EditorSceneManager.UnloadSceneAsync("Assets/Scenes/GameScene.unity");
+    }
+
+
     [UnityTest]
     public IEnumerator IsCollisionDetected()
     {
@@ -40,7 +48,17 @@ public class ObstacleTest : IPrebuildSetup
         {
             Assert.Greater(storeSpeed, -player.GetComponent<PlayerController>().forwardMovement);
         }
+        yield return null;
+    }
 
+    [UnityTest]
+    public IEnumerator DoesPlayerLoseLife()
+    {
+        var storeLives = player.GetComponent<PlayerLives>().lives;
+        if (player.GetComponent<PlayerController>().hit)
+        {
+            Assert.Less(storeLives, player.GetComponent<PlayerLives>().lives);
+        }
         yield return null;
     }
 
