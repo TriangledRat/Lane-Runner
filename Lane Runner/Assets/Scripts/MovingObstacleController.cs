@@ -41,7 +41,7 @@ public class MovingObstacleController : MonoBehaviour
         switch (targetLane)
         {
             case 0:
-                targetpos = new Vector3(storePos.x, 0.5f, -5);
+                targetpos = new Vector3(storePos.x, 0.5f, 5);
                 currentLane = 0;
                 break;
             case 1:
@@ -49,7 +49,7 @@ public class MovingObstacleController : MonoBehaviour
                 currentLane = 1;
                 break;
             case 2:
-                targetpos = new Vector3(storePos.x, 0.5f, 5);
+                targetpos = new Vector3(storePos.x, 0.5f, -5);
                 currentLane = 2;
                 break;
             default:
@@ -83,13 +83,13 @@ public class MovingObstacleController : MonoBehaviour
     {
         switch (transform.position.z)
         {
-            case -5:
+            case 5:
                 currentLane = 0;
                 break;
             case 0:
                 currentLane = 1;
                 break;
-            case 5:
+            case -5:
                 currentLane = 2;
                 break;
 

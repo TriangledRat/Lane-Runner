@@ -42,13 +42,13 @@ public class PlayerController : MonoBehaviour
         switch (playerPos)
         {
             case 0:
-                targetPos = new Vector3(storePos.x, storePos.y, -5);
+                targetPos = new Vector3(storePos.x, storePos.y, 5);
                 break;
             case 1:
                 targetPos = new Vector3(storePos.x, storePos.y, 0);
                 break;
             case 2:
-                targetPos = new Vector3(storePos.x, storePos.y, 5);
+                targetPos = new Vector3(storePos.x, storePos.y, -5);
                 break;
             default:
                 targetPos = new Vector3(storePos.x, storePos.y, 0);
