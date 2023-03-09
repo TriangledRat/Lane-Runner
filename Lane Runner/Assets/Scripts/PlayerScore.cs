@@ -4,11 +4,22 @@ using UnityEngine;
 
 public class PlayerScore : MonoBehaviour
 {
-    public int score;
-    int distanceRun;
+    public int score, distanceRun;
+    public bool coinHit;
+    private int coinTotal;
+    GameObject player;
+
+    private void Start()
+    {
+        player = this.gameObject;
+    }
     void Update()
     {
-        score = (int) transform.position.x;
-        distanceRun = score / 3;
+        coinTotal = player.GetComponent<CoinInventory>().coins;
+        score = (int) transform.position.x + (coinTotal * 10);
+        distanceRun = (int) transform.position.x / 3;
+        Debug.Log(score);
+
+
     }
 }
