@@ -86,7 +86,7 @@ public class PlayerController : MonoBehaviour
             forwardMovement = forwardStore;
         }
 
-        movingVector.x = -forwardMovement;
+        movingVector.x = forwardMovement;
         movingVector.y = verticalSpeed;
         movingVector.z = (targetPos - transform.position).z * speed;
         controller.Move(movingVector * Time.deltaTime);
