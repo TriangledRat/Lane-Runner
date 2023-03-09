@@ -163,6 +163,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   coins: 0
+  player: {fileID: 1391048661303985440}
 --- !u!1 &1391048661874834436
 GameObject:
   m_ObjectHideFlags: 0
