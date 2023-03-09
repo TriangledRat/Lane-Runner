@@ -112,7 +112,7 @@ public class PlayerController : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if(other.gameObject.tag == "Obstacle" && !recovery)
+        if(other.gameObject.tag == "Obstacle" || other.gameObject.tag == "MovingObstacle" && !recovery)
         {
             hit = true;
             cooldown = 3;
