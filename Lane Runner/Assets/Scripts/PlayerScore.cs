@@ -18,7 +18,6 @@ public class PlayerScore : MonoBehaviour
         coinTotal = player.GetComponent<CoinInventory>().coins;
         score = (int) transform.position.x + (coinTotal * 10);
         distanceRun = (int) transform.position.x / 3;
-        Debug.Log(score);
 
 
     }
