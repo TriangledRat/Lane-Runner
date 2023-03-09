@@ -27,6 +27,10 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (!recovery)
+        {
+            this.GetComponent<Renderer>().material.SetColor("_Color", Color.white);
+        }
         Vector3 movingVector = Vector3.zero;
         storePos = transform.position;  
         if (Input.GetKeyDown("left"))
@@ -77,6 +81,7 @@ public class PlayerController : MonoBehaviour
 
         if (recovery)
         {
+            this.GetComponent<Renderer>().material.SetColor("_Color", Color.red);
             cooldown -= Time.deltaTime;
         }
 
@@ -112,10 +117,13 @@ public class PlayerController : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if(other.gameObject.tag == "Obstacle" || other.gameObject.tag == "MovingObstacle" && !recovery)
+        if(other.gameObject.tag == "Obstacle" || other.gameObject.tag == "MovingObstacle")
         {
-            hit = true;
-            cooldown = 3;
+            if (!recovery)
+            {
+                hit = true;
+                cooldown = 3;
+            }
         }
     }
 
