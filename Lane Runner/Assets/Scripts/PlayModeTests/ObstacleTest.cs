@@ -9,7 +9,7 @@ using UnityEngine.TestTools;
 
 public class ObstacleTest : IPrebuildSetup
 {
-    GameObject player, obstacle;
+    GameObject player, obstacle, scenePlayer;
 
     [SetUp]
     public void Setup()
@@ -17,7 +17,8 @@ public class ObstacleTest : IPrebuildSetup
         EditorSceneManager.LoadSceneAsyncInPlayMode("Assets/Scenes/GameScene.unity", new LoadSceneParameters(LoadSceneMode.Additive));
         GameObject playerPrefab = AssetDatabase.LoadAssetAtPath<GameObject>("Assets/Prefab/Player.prefab");
         player = GameObject.Instantiate(playerPrefab);
-
+        player.transform.position = new Vector3(0, 0.95f, 0);
+        scenePlayer = GameObject.Find("Player");
         obstacle = GameObject.FindGameObjectWithTag("Obstacle");
     }
 
@@ -42,12 +43,12 @@ public class ObstacleTest : IPrebuildSetup
     [UnityTest]
     public IEnumerator DoesPlayerSlowDown()
     {
-        var storeSpeed = -player.GetComponent<PlayerController>().forwardMovement;
+        var storeSpeed = player.GetComponent<PlayerController>().forwardMovement;
         if (player.GetComponent<PlayerController>().hit)
         {
-            Assert.Greater(storeSpeed, -player.GetComponent<PlayerController>().forwardMovement);
+            Assert.Greater(storeSpeed, player.GetComponent<PlayerController>().forwardMovement);
         }
-        yield return null;
+        yield return new WaitForEndOfFrame();
     }
 
     [UnityTest]
@@ -60,5 +61,24 @@ public class ObstacleTest : IPrebuildSetup
         }
         yield return null;
     }
+
+    [UnityTest]
+    public IEnumerator IsRecoveryActivated()
+    {
+        yield return new WaitForSecondsRealtime(4);
+        Assert.IsTrue(player.GetComponent<PlayerController>().recovery);
+        Assert.AreEqual(2, player.GetComponent<PlayerLives>().lives);
+        yield return new WaitForSecondsRealtime(1);
+        Debug.Log(player.GetComponent<PlayerLives>().lives);
+    }
+
+
+    [UnityTest]
+    public IEnumerator DoesAHitOnlyTakeOneLife()
+    {
+        yield return new WaitUntil(() => player.GetComponent<PlayerController>().recovery);
+        Assert.AreEqual(player.GetComponent<PlayerLives>().lives, 2);
+    }
+
 
 }

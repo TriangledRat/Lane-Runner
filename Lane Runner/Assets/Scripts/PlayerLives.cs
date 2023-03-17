@@ -17,11 +17,6 @@ public class PlayerLives : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (playerController.hit)
-        {
-            lives--;
-        }        
-
         if(lives == 0)
         {
             SceneManager.LoadScene("GameOverScene");

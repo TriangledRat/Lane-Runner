@@ -1,3 +1,4 @@
+using Codice.Client.Common.GameUI;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
@@ -11,8 +12,9 @@ public class PlayerController : MonoBehaviour
     int playerPos;
     Vector3 targetPos, storePos;
     float verticalSpeed, gravity = 9.81f, forwardStore, cooldown;
-    bool recovery = false;
+    public bool recovery = false;
     public bool hit;
+    public int hits;
     // Start is called before the first frame update
     void Start()
     {
@@ -27,6 +29,7 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        Debug.Log(lives.lives);
         if (!recovery)
         {
             this.GetComponent<Renderer>().material.SetColor("_Color", Color.white);
@@ -73,14 +76,14 @@ public class PlayerController : MonoBehaviour
 
         if (hit)
         {
-            lives.lives--;
+            
             forwardMovement /= 2;
-            recovery = true;
+            recovery = true;           
             hit = false;
         }
 
         if (recovery)
-        {
+        {            
             this.GetComponent<Renderer>().material.SetColor("_Color", Color.red);
             cooldown -= Time.deltaTime;
         }
@@ -120,11 +123,11 @@ public class PlayerController : MonoBehaviour
         if(other.gameObject.tag == "Obstacle" || other.gameObject.tag == "MovingObstacle")
         {
             if (!recovery)
-            {
+            {                
+                lives.lives--;
                 hit = true;
                 cooldown = 3;
             }
         }
     }
-
 }
