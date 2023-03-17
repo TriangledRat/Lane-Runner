@@ -9,7 +9,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] public float speed=10, jumpSpeed = 5, forwardMovement = 10;
     CharacterController controller;
     PlayerLives lives;
-    int playerPos;
+    public int playerPos;
     Vector3 targetPos, storePos;
     float verticalSpeed, gravity = 9.81f, forwardStore, cooldown;
     public bool recovery = false;
@@ -29,7 +29,6 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Debug.Log(lives.lives);
         if (!recovery)
         {
             this.GetComponent<Renderer>().material.SetColor("_Color", Color.white);
@@ -75,8 +74,7 @@ public class PlayerController : MonoBehaviour
         }
 
         if (hit)
-        {
-            
+        {            
             forwardMovement /= 2;
             recovery = true;           
             hit = false;

@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 5723103949740808065}
   - component: {fileID: 5723103949740808069}
   - component: {fileID: 5723103949740808063}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Moving Obstacle
   m_TagString: Obstacle
   m_Icon: {fileID: 0}
