@@ -14,6 +14,7 @@ public class PlayerController : MonoBehaviour
     float verticalSpeed, gravity = 9.81f, forwardStore, cooldown;
     public bool recovery = false;
     public bool hit;
+    public bool winner;
     public int hits;
     // Start is called before the first frame update
     void Start()
@@ -126,6 +127,12 @@ public class PlayerController : MonoBehaviour
                 hit = true;
                 cooldown = 3;
             }
+        }
+
+        if (other.gameObject.tag == "Finish")
+        {
+            winner = true;
+            Debug.Log("Win!");
         }
     }
 }

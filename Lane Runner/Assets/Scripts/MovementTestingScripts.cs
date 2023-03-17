@@ -5,7 +5,7 @@ using UnityEngine;
 public class MovementTestingScripts : MonoBehaviour
 {
     public bool laneTesting = false;
-    public bool jumpingTesting = true;
+    public bool jumpingTesting = false;
     private bool hit;
     int layerMask = 1 << 8;
     PlayerController controller;
@@ -17,11 +17,6 @@ public class MovementTestingScripts : MonoBehaviour
         cc = GetComponent<CharacterController>();
     }
 
-    // Update is called once per frame
-    void FixedUpdate()
-    {
-      
-    }
     private void Update()
     {
         Debug.Log(hit);

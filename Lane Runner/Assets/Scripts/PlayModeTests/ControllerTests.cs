@@ -85,4 +85,21 @@ public class ControllerTests : IPrebuildSetup
         Assert.AreEqual(storePosition, player.transform.position.z);
      
     }
+
+    [UnityTest]
+    public IEnumerator PlayerCanWinByOnlyJumping()
+    {
+        player.GetComponent<MovementTestingScripts>().jumpingTesting = true;
+        yield return new WaitUntil(() => player.GetComponent<PlayerController>().winner == true);
+        Assert.Greater(player.GetComponent<PlayerLives>().lives, 0);
+    }
+
+    [UnityTest]
+    public IEnumerator PlayerCanWinByOnlyMovingLanes()
+    {
+        player.GetComponent<MovementTestingScripts>().laneTesting = true;
+        yield return new WaitUntil(() => player.GetComponent<PlayerController>().winner == true);
+        Assert.Greater(player.GetComponent<PlayerLives>().lives, 0);
+
+    }
 }
