@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PlayerController : MonoBehaviour
 {
@@ -131,8 +132,7 @@ public class PlayerController : MonoBehaviour
 
         if (other.gameObject.tag == "Finish")
         {
-            winner = true;
-            Debug.Log("Win!");
+            SceneManager.LoadScene("GameOverScene");
         }
     }
 }
