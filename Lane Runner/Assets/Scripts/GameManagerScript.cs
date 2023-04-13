@@ -7,8 +7,8 @@ public class GameManagerScript : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        //Time.timeScale = 0f;
-        //StartCoroutine(CountingDown());
+        Time.timeScale = 0f;
+        StartCoroutine(CountingDown());
     }
 
     IEnumerator CountingDown()
